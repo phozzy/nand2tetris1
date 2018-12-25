@@ -28,4 +28,7 @@ CHIP Mux4Way16 {
     Sel16(sel=sel01, in=b, out=out01);
     Sel16(sel=sel10, in=c, out=out10);
     Sel16(sel=sel11, in=d, out=out11);
+    Or16(a=out00, b=out01, out=or0);
+    Or16(a=or0, b=out10, out=or1);
+    Or16(a=or1, b=out11, out=out);
 }
