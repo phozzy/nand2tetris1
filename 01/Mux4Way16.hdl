@@ -1,0 +1,91 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Mux4Way16.hdl
+
+/**
+ * 4-way 16-bit multiplexor:
+ * out = a if sel == 00
+ *       b if sel == 01
+ *       c if sel == 10
+ *       d if sel == 11
+ */
+
+CHIP Mux4Way16 {
+    IN a[16], b[16], c[16], d[16], sel[2];
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+    Or(a=sel[0], b=sel[1], out=not00);
+    Not(in=not00, out=sel00);
+    Not(in=b[0], out=notb0);
+    And(a=notb0, b=b[1], out=sel01);
+    Not(in=b[1], out=notb1);
+    And(a=b[0], b=notb1, out=sel10);
+    And(a=b[0], b=b[1], out=sel11);
+    And(a=a[0], b=sel00, out=out[0]);
+    And(a=a[1], b=sel00, out=out[1]);
+    And(a=a[2], b=sel00, out=out[2]);
+    And(a=a[3], b=sel00, out=out[3]);
+    And(a=a[4], b=sel00, out=out[4]);
+    And(a=a[5], b=sel00, out=out[5]);
+    And(a=a[6], b=sel00, out=out[6]);
+    And(a=a[7], b=sel00, out=out[7]);
+    And(a=a[8], b=sel00, out=out[8]);
+    And(a=a[9], b=sel00, out=out[9]);
+    And(a=a[10], b=sel00, out=out[10]);
+    And(a=a[11], b=sel00, out=out[11]);
+    And(a=a[12], b=sel00, out=out[12]);
+    And(a=a[13], b=sel00, out=out[13]);
+    And(a=a[14], b=sel00, out=out[14]);
+    And(a=a[15], b=sel00, out=out[15]);
+    And(a=b[0], b=sel01, out=out[0]);
+    And(a=b[1], b=sel01, out=out[1]);
+    And(a=b[2], b=sel01, out=out[2]);
+    And(a=b[3], b=sel01, out=out[3]);
+    And(a=b[4], b=sel01, out=out[4]);
+    And(a=b[5], b=sel01, out=out[5]);
+    And(a=b[6], b=sel01, out=out[6]);
+    And(a=b[7], b=sel01, out=out[7]);
+    And(a=b[8], b=sel01, out=out[8]);
+    And(a=b[9], b=sel01, out=out[9]);
+    And(a=b[10], b=sel01, out=out[10]);
+    And(a=b[11], b=sel01, out=out[11]);
+    And(a=b[12], b=sel01, out=out[12]);
+    And(a=b[13], b=sel01, out=out[13]);
+    And(a=b[14], b=sel01, out=out[14]);
+    And(a=b[15], b=sel01, out=out[15]);
+    And(a=c[0], b=sel10, out=out[0]);
+    And(a=c[1], b=sel10, out=out[1]);
+    And(a=c[2], b=sel10, out=out[2]);
+    And(a=c[3], b=sel10, out=out[3]);
+    And(a=c[4], b=sel10, out=out[4]);
+    And(a=c[5], b=sel10, out=out[5]);
+    And(a=c[6], b=sel10, out=out[6]);
+    And(a=c[7], b=sel10, out=out[7]);
+    And(a=c[8], b=sel10, out=out[8]);
+    And(a=c[9], b=sel10, out=out[9]);
+    And(a=c[10], b=sel10, out=out[10]);
+    And(a=c[11], b=sel10, out=out[11]);
+    And(a=c[12], b=sel10, out=out[12]);
+    And(a=c[13], b=sel10, out=out[13]);
+    And(a=c[14], b=sel10, out=out[14]);
+    And(a=c[15], b=sel10, out=out[15]);
+    And(a=d[0], b=sel11, out=out[0]);
+    And(a=d[1], b=sel11, out=out[1]);
+    And(a=d[2], b=sel11, out=out[2]);
+    And(a=d[3], b=sel11, out=out[3]);
+    And(a=d[4], b=sel11, out=out[4]);
+    And(a=d[5], b=sel11, out=out[5]);
+    And(a=d[6], b=sel11, out=out[6]);
+    And(a=d[7], b=sel11, out=out[7]);
+    And(a=d[8], b=sel11, out=out[8]);
+    And(a=d[9], b=sel11, out=out[9]);
+    And(a=d[10], b=sel11, out=out[10]);
+    And(a=d[11], b=sel11, out=out[11]);
+    And(a=d[12], b=sel11, out=out[12]);
+    And(a=d[13], b=sel11, out=out[13]);
+    And(a=d[14], b=sel11, out=out[14]);
+    And(a=d[15], b=sel11, out=out[15]);
+}
