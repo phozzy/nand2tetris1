@@ -22,13 +22,13 @@ CHIP Mux4Way16 {
     Or(a=sel[0], b=sel[1], out=notsel00);
     Not(in=notsel00, out=sel00);
 
-    // and(not(sel[0]), sel[1]) - true only if 01
-    Not(in=sel[0], out=notsel01);
-    And(a=notsel01, b=sel[1], out=sel01);
+    // and(not(sel[1]), sel[0]) - true only if 01, looks like if pins are flipped
+    Not(in=sel[1], out=notsel01);
+    And(a=notsel01, b=sel[0], out=sel01);
 
-    // and(sel[0], not(sel[1])) - true only if 10
-    Not(in=sel[1], out=notsel10);
-    And(a=sel[0], b=notsel10, out=sel10);
+    // and(sel[1], not(sel[0])) - true only if 10, looks like if pins are flipped
+    Not(in=sel[0], out=notsel10);
+    And(a=sel[1], b=notsel10, out=sel10);
 
     // and(sel[0], sel[1]) - true only if 11
     And(a=sel[0], b=sel[1], out=sel11);
