@@ -19,10 +19,10 @@ CHIP Mux4Way16 {
     // Put your code here:
     Or(a=sel[0], b=sel[1], out=notsel00);
     Not(in=notsel00, out=sel00);
-    Not(in=sel[0], out=notsel0_);
-    And(a=notsel0_, b=sel[1], out=sel01);
-    Not(in=sel[1], out=notsel_0);
-    And(a=sel[0], b=notsel_0, out=sel10);
+    Not(in=sel[0], out=notsel01);
+    And(a=notsel01, b=sel[1], out=sel01);
+    Not(in=sel[1], out=notsel10);
+    And(a=sel[0], b=notsel10, out=sel10);
     And(a=sel[0], b=sel[1], out=sel11);
     Sel16(sel=sel00, in=a, out=out00);
     Sel16(sel=sel01, in=b, out=out01);
