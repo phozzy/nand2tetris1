@@ -47,4 +47,18 @@ CHIP Mux8Way16 {
     Or(a=sel[1], b=sel[2], out=orsel100);
     Not(in=orsel100, out=norsel100);
     And(a=norsel100, b=sel[0], out=sel100);
+
+    // and(sel[0], not(sel[1]), sel[2]) - true only if 101
+    Not(in=sel[1], out=notsel101);
+    And(a=sel[0], b=notsel101, out=andsel101);
+    And(a=andsel101, b=sel[2], out=sel101);
+
+    // and(sel[0], sel[1], not(sel[2])) - true only if 110
+    Not(in=sel[2], out=notsel110);
+    And(a=sel[0], b=sel[1], out=andsel110);
+    And(a=andsel110, b=notsel110, out=sel110);
+
+    // and(sel[0], sel[1], sel[2]) - true only if 111
+    And(a=sel[0], b=sel[1], out=andsel111);
+    And(a=andsel111, b=sel[2], out=sel111);
 }
