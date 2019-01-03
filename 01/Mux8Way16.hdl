@@ -25,11 +25,11 @@ CHIP Mux8Way16 {
     Or(a=sel000or, b=sel[2], out=notsel000);
     Not(in=notsel000, out=sel000);
 
-    // and(not(sel[0]), not(sel[1]), sel[2]) - true only if 001
-    // and(not(or(sel[0], sel[1])), sel[2])
-    Or(a=sel[0], b=sel[1], out=orsel001);
+    // and(not(sel[2]), not(sel[1]), sel[0]) - true only if 001
+    // and(not(or(sel[2], sel[1])), sel[0])
+    Or(a=sel[2], b=sel[1], out=orsel001);
     Not(in=orsel001, out=norsel001);
-    And(a=norsel001, b=sel[2], out=sel001);
+    And(a=norsel001, b=sel[0], out=sel001);
 
     // and(not(sel[0]), sel[1], not(sel[2])) - true only if 010
     // and(not(or(sel[0], sel[2])), sel[1])
@@ -37,28 +37,61 @@ CHIP Mux8Way16 {
     Not(in=orsel010, out=norsel010);
     And(a=norsel010, b=sel[1], out=sel010);
 
-    // and(not(sel[0]), sel[1], sel[2]) - true only if 011
-    Not(in=sel[0], out=notsel011);
+    // and(not(sel[2]), sel[1], sel[0]) - true only if 011
+    Not(in=sel[2], out=notsel011);
     And(a=notsel011, b=sel[1], out=andsel011);
-    And(a=andsel011, b=sel[2], out=sel011);
+    And(a=andsel011, b=sel[0], out=sel011);
 
-    // and(sel[0], not(sel[1]), not(sel[2])) - true only if 100
-    // and(sel[0], not(or(sel[1], sel[2])))
-    Or(a=sel[1], b=sel[2], out=orsel100);
+    // and(sel[2], not(sel[1]), not(sel[0])) - true only if 100
+    // and(sel[2], not(or(sel[1], sel[0])))
+    Or(a=sel[1], b=sel[0], out=orsel100);
     Not(in=orsel100, out=norsel100);
-    And(a=norsel100, b=sel[0], out=sel100);
+    And(a=norsel100, b=sel[2], out=sel100);
 
     // and(sel[0], not(sel[1]), sel[2]) - true only if 101
     Not(in=sel[1], out=notsel101);
     And(a=sel[0], b=notsel101, out=andsel101);
     And(a=andsel101, b=sel[2], out=sel101);
 
-    // and(sel[0], sel[1], not(sel[2])) - true only if 110
-    Not(in=sel[2], out=notsel110);
-    And(a=sel[0], b=sel[1], out=andsel110);
+    // and(sel[2], sel[1], not(sel[0])) - true only if 110
+    Not(in=sel[0], out=notsel110);
+    And(a=sel[2], b=sel[1], out=andsel110);
     And(a=andsel110, b=notsel110, out=sel110);
 
     // and(sel[0], sel[1], sel[2]) - true only if 111
     And(a=sel[0], b=sel[1], out=andsel111);
     And(a=andsel111, b=sel[2], out=sel111);
+
+    // if 000 then a
+    Sel16(sel=sel000, in=a, out=out000);
+
+    // if 001 then b
+    Sel16(sel=sel001, in=b, out=out001);
+
+    // if 010 then c
+    Sel16(sel=sel010, in=c, out=out010);
+
+    // if 011 then d
+    Sel16(sel=sel011, in=d, out=out011);
+
+    // if 100 then e
+    Sel16(sel=sel100, in=e, out=out100);
+
+    // if 101 then f
+    Sel16(sel=sel101, in=f, out=out101);
+
+    // if 110 then g
+    Sel16(sel=sel110, in=g, out=out110);
+
+    // if 111 then h
+    Sel16(sel=sel111, in=h, out=out111);
+
+    Or16(a=out000, b=out001, out=or0);
+    Or16(a=or0, b=out010, out=or1);
+    Or16(a=or1, b=out011, out=or2);
+    Or16(a=or2, b=out100, out=or3);
+    Or16(a=or3, b=out101, out=or4);
+    Or16(a=or4, b=out110, out=or5);
+    Or16(a=or5, b=out111, out=out);
+
 }
